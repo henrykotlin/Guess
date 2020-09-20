@@ -11,31 +11,34 @@ import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
     val secretNumber = SecretNumber()
+    val TAG = MainActivity::class.java.simpleName
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Log.d("MainActivity","secret:"+secretNumber.secret)
+        Log.d(TAG,"secret:"+secretNumber.secret)
 
     }
     fun check(view : View){
 
         val n = ed_number.text.toString().toInt()
         println("number: $n")
-        Log.d("MainActivity","number:"+n)
+        Log.d(TAG,"number:"+n)
         val diff = secretNumber.validate(n)
-        var message = "Well Done! You got it!"
+        var message = getString(R.string.well_done)
         if (diff < 0){
-            message = "bigger"
+            message = getString(R.string.bigger)
         }
         else if (diff > 0){
-            message = "smaller"
+            message = getString(R.string.smaller)
         }
 //        Toast.makeText(this,message,Toast.LENGTH_LONG).show()
         AlertDialog.Builder(this)
-            .setTitle("Message")
+            .setTitle(getString(R.string.title_message))
             .setMessage(message)
-            .setPositiveButton("OK",null)
+            .setPositiveButton(getString(R.string.ok),null)
             .show()
 
     }
